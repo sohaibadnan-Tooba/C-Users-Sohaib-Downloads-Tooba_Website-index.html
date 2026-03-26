@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooba | Elegance in Every Thread</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --maroon: #630d0d;
+            --gold: #c5a059;
+            --beige: #fefcf9; /* Warmer, softer beige for a premium feel */
+            --white: #ffffff;
+            --dark: #333333; /* Softer text color to reduce eye strain */
+            --soft-shadow: 0 10px 40px rgba(0,0,0,0.06); /* Luxury drop shadow */
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--beige); /* Light premium background */
+            color: var(--dark);
+            line-height: 1.7; /* Increased line-height for readability */
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .brand-name {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: rgba(255, 255, 255, 0.85); /* Glass effect */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+            transition: var(--transition);
+        }
+
+        .logo-img { /* Premium styling for logo */
+            height: 55px; 
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+
+        .cart-count {
+            background: var(--maroon);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            position: relative;
+            top: -10px;
+            left: -10px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://i.ibb.co/C04Y1xY/hero-banner.jpg') no-repeat center/cover; /* Kept previous banner, fits well */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; }
+        .btn {
+            padding: 12px 30px;
+            background: var(--maroon);
+            color: var(--white);
+            border: none;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+        .btn:hover { background: var(--gold); }
+
+        /* --- SECTIONS GENERAL --- */
+        section { padding: 80px 8%; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 { font-size: 2.5rem; color: var(--maroon); }
+        .section-title div {
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+            margin: 10px auto;
+        }
+
+        /* --- FEATURED COLLECTIONS --- */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; /* Increased gap */
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            height: 480px; /* Slightly taller */
+            border-radius: 12px;
+            box-shadow: var(--soft-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+
+        .collection-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+        .collection-card:hover img { transform: scale(1.05); }
+
+        /* --- PRODUCT GRID --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--soft-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .product-img {
+            position: relative;
+            overflow: hidden;
+            height: 380px; /* Slightly taller */
+            background: #eee;
+        }
+
+        .product-img img { height: 100%; width: 100%; object-fit: cover; }
+
+        .add-to-cart-overlay {
+            position: absolute;
+            bottom: -50px;
+            width: 100%;
+            background: var(--maroon);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .add-to-cart-overlay { bottom: 0; }
+
+        .product-info { padding: 15px 0; text-align: center; }
+        .product-price { color: var(--gold); font-weight: bold; }
+
+        /* --- PRODUCT DETAIL PAGE --- */
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .detail-info h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .detail-price { font-size: 1.5rem; color: var(--maroon); margin-bottom: 20px; }
+        .size-selector { margin: 20px 0; }
+        .size-btn {
+            border: 1px solid #ddd;
+            padding: 8px 15px;
+            margin-right: 5px;
+            background: white;
+            cursor: pointer;
+        }
+        .size-btn.active { background: var(--maroon); color: white; }
+
+        /* --- CONTACT & ABOUT --- */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--beige);
+            padding: 60px 8% 20px;
+            border-top: 1px solid #eee;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo { 
+            height: 50px; /* Adjust height for footer logo */
+            width: auto;
+        }
+        .social-links a { font-size: 1.5rem; margin-right: 15px; color: var(--maroon); }
+
+        /* --- CART SIDEBAR --- */
+        #cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: 0.4s;
+            padding: 30px;
+        }
+        #cart-sidebar.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+
+        /* --- HAMBURGER MENU --- */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--maroon);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links { 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            .nav-links.nav-active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .nav-links li { margin: 15px 0; }
+            .hamburger-menu { display: block; margin-left:15px; }
+
+            .product-detail-container, .contact-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .logo-img { height: 45px; }
+            .footer-logo { height: 40px; }
+        }
+
+        /* PAGE VISIBILITY WITH FADE */
+        .page { 
+            display: none; 
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .page.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- CHATBOT CSS --- */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+        .chat-btn {
+            background: var(--maroon);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+        }
+        .chat-btn:hover { transform: scale(1.1); }
+        
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 320px;
+            height: 400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+        .chat-header {
+            background: var(--maroon);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header i { cursor: pointer; }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #fdfbf9;
+            font-size: 0.9rem;
+        }
+        .chat-msg {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .msg-bot { background: #eee; align-self: flex-start; }
+        .msg-user { background: var(--maroon); color: white; align-self: flex-end; margin-left: auto; }
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            border: none;
+            padding: 15px;
+            outline: none;
+            margin-bottom: 0; /* Override generic input margin */
+        }
+        .chat-input-area button {
+            background: var(--maroon);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .chat-input-area button:hover { background: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <svg width="45" height="45" viewBox="0 0 100 100" fill="none" class="logo-img" style="border-radius: 4px;">
+                <rect width="100" height="100" fill="#f22c00"/>
+                <path d="M50 100 C 50 70, 48 50, 45 40 M50 100 C 50 70, 52 50, 55 40 M45 40 C 35 30, 25 25, 15 20 M55 40 C 65 30, 75 25, 85 20 M45 40 C 40 20, 30 15, 20 10 M55 40 C 60 20, 70 15, 80 10 M50 100 L50 40" stroke="#ff7c00" stroke-width="8" stroke-linecap="round" fill="none"/>
+                <path d="M50 100 L50 90" stroke="#ff7c00" stroke-width="12" stroke-linecap="round"/>
+                <ellipse cx="20" cy="20" rx="10" ry="5" fill="#00ffff" transform="rotate(-30 20 20)"/>
+                <ellipse cx="80" cy="20" rx="10" ry="5" fill="#66cc33" transform="rotate(30 80 20)"/>
+                <ellipse cx="30" cy="15" rx="9" ry="5" fill="#ffff99" transform="rotate(20 30 15)"/>
+                <ellipse cx="70" cy="15" rx="9" ry="5" fill="#00ffff" transform="rotate(-20 70 15)"/>
+                <ellipse cx="40" cy="25" rx="11" ry="6" fill="#66cc33" transform="rotate(-15 40 25)"/>
+                <ellipse cx="58" cy="23" rx="10" ry="5" fill="#ffff99" transform="rotate(15 58 23)"/>
+                <ellipse cx="15" cy="35" rx="12" ry="6" fill="#00ffff" transform="rotate(-40 15 35)"/>
+                <ellipse cx="85" cy="35" rx="11" ry="5" fill="#ffff99" transform="rotate(40 85 35)"/>
+                <ellipse cx="28" cy="45" rx="13" ry="6" fill="#00ffff" transform="rotate(-10 28 45)"/>
+                <ellipse cx="75" cy="42" rx="12" ry="6" fill="#ffff99" transform="rotate(15 75 42)"/>
+            </svg>
+            <div class="logo-text" style="font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 800;">
+                <span style="color: #f23514;">T</span><span style="color: #c417cf;">o</span><span style="color: #8ed44b;">o</span><span style="color: #fbc200;">b</span><span style="color: #4a7ec4;">a</span>
+            </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a onclick="showPage('home'); toggleMenu()">Home</a></li>
+            <li><a onclick="showPage('shop'); toggleMenu()">Shop</a></li>
+            <li><a onclick="showPage('about'); toggleMenu()">Our Story</a></li>
+            <li><a onclick="showPage('contact'); toggleMenu()">Contact</a></li>
+        </ul>
+        <div class="nav-icons" style="display:flex; align-items:center;">
+            <i class="fa fa-search"></i>
+            <i class="fa fa-user" style="margin-left:20px;"></i>
+            <div onclick="toggleCart()" style="cursor: pointer; margin-left:20px; display:flex;">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <!-- HAMBURGER MENU ICON -->
+            <i class="fa fa-bars hamburger-menu" onclick="toggleMenu()"></i>
+        </div>
+    </nav>
+
+    <!-- SHOPPING CART (SIDEBAR) -->
+    <div id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Bag</h3>
+            <i class="fa fa-times" onclick="toggleCart()" style="cursor:pointer"></i>
+        </div>
+        <div id="cart-items" style="padding: 20px 0;">
+            <p style="text-align: center; color: #999;">Your cart is empty</p>
+        </div>
+        <button class="btn" style="width: 100%;">Checkout</button>
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <p>Traditional Craftsmanship</p>
+            <h1 style="font-family: 'Nunito', sans-serif; font-size: 5.5rem; font-weight: 800; background: rgba(255,255,255,0.85); padding: 10px 50px; border-radius: 20px; display: inline-block; margin-bottom: 20px;">
+                <span style="color: #f23514;">T</span><span style="color: #c417cf;">o</span><span style="color: #8ed44b;">o</span><span style="color: #fbc200;">b</span><span style="color: #4a7ec4;">a</span>
+            </h1>
+            <p>Elegance in Every Thread</p>
+            <button class="btn" onclick="showPage('shop')">Explore Collection</button>
+        </section>
+
+
+
+        <section style="background: var(--beige);">
+            <div class="section-title">
+                <h2>New Arrivals</h2>
+                <div></div>
+            </div>
+            <div class="product-grid" id="new-arrivals-grid">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- SHOP PAGE -->
+    <div id="shop" class="page">
+        <section>
+            <div class="section-title">
+                <h2>Our Collection</h2>
+                <div></div>
+            </div>
+            <div class="product-grid" id="shop-grid">
+                <!-- Products injected by JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- PRODUCT DETAIL PAGE -->
+    <div id="product-detail" class="page">
+        <section>
+            <div class="product-detail-container">
+                <div class="detail-image">
+                    <img id="detail-img" src="" alt="Product Image">
+                </div>
+                <div class="detail-info">
+                    <h2 id="detail-title">Product Name</h2>
+                    <p class="detail-price" id="detail-price">PKR 0.00</p>
+                    <p>Experience the luxury of hand-woven embroidery and premium fabric sourced from the heart of Pakistan. Perfect for your special occasions.</p>
+                    
+                    <div class="size-selector">
+                        <p><strong>Select Size:</strong></p><br>
+                        <button class="size-btn">S</button>
+                        <button class="size-btn active">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+
+                    <button class="btn" onclick="addToCart()">Add to Bag</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section>
+            <div class="about-content">
+                <div class="section-title">
+                    <h2>Our Story</h2>
+                    <div></div>
+                </div>
+                <p>Tooba was founded with a vision to revive the intricate art of Pakistani textiles. Based in the cultural hubs of Pakistan, we collaborate with local artisans to bring you designs that blend centuries-old craftsmanship with modern silhouettes.</p>
+                <br>
+                <p>Every thread in a Tooba garment tells a story of heritage, passion, and elegance. We believe that fashion is not just what you wear, but how you carry your culture.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section>
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <div></div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-form">
+                    <form onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p><i class="fa fa-map-marker-alt"></i> H#441-G block, Khayaban-E-Amin, Defence Road, Lahore</p>
+                    <p><i class="fa fa-phone"></i> 00 92 322 4088004</p>
+                    <p><i class="fa fa-envelope"></i> sohaibadnan@gmail.com</p>
+                    <div style="margin-top:20px; background:#eee; height:200px; display:flex; align-items:center; justify-content:center;">
+                        [Google Maps Placeholder]
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px;">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" style="border-radius: 4px;">
+                        <rect width="100" height="100" fill="#f22c00"/>
+                        <path d="M50 100 C 50 70, 48 50, 45 40 M50 100 C 50 70, 52 50, 55 40 M45 40 C 35 30, 25 25, 15 20 M55 40 C 65 30, 75 25, 85 20 M45 40 C 40 20, 30 15, 20 10 M55 40 C 60 20, 70 15, 80 10 M50 100 L50 40" stroke="#ff7c00" stroke-width="8" stroke-linecap="round" fill="none"/>
+                        <path d="M50 100 L50 90" stroke="#ff7c00" stroke-width="12" stroke-linecap="round"/>
+                        <ellipse cx="20" cy="20" rx="10" ry="5" fill="#00ffff" transform="rotate(-30 20 20)"/>
+                        <ellipse cx="80" cy="20" rx="10" ry="5" fill="#66cc33" transform="rotate(30 80 20)"/>
+                        <ellipse cx="30" cy="15" rx="9" ry="5" fill="#ffff99" transform="rotate(20 30 15)"/>
+                        <ellipse cx="70" cy="15" rx="9" ry="5" fill="#00ffff" transform="rotate(-20 70 15)"/>
+                        <ellipse cx="40" cy="25" rx="11" ry="6" fill="#66cc33" transform="rotate(-15 40 25)"/>
+                        <ellipse cx="58" cy="23" rx="10" ry="5" fill="#ffff99" transform="rotate(15 58 23)"/>
+                        <ellipse cx="15" cy="35" rx="12" ry="6" fill="#00ffff" transform="rotate(-40 15 35)"/>
+                        <ellipse cx="85" cy="35" rx="11" ry="5" fill="#ffff99" transform="rotate(40 85 35)"/>
+                        <ellipse cx="28" cy="45" rx="13" ry="6" fill="#00ffff" transform="rotate(-10 28 45)"/>
+                        <ellipse cx="75" cy="42" rx="12" ry="6" fill="#ffff99" transform="rotate(15 75 42)"/>
+                    </svg>
+                    <div style="font-family: 'Nunito', sans-serif; font-size: 2rem; font-weight: 800;">
+                        <span style="color: #f23514;">T</span><span style="color: #c417cf;">o</span><span style="color: #8ed44b;">o</span><span style="color: #fbc200;">b</span><span style="color: #4a7ec4;">a</span>
+                    </div>
+                </div>
+                <p>Bringing you the finest Pakistani craftsmanship since 2010.</p>
+            </div>
+            <div>
+                <h4>Shop</h4>
+                <ul style="margin-top:15px;">
+                    <li><a onclick="showPage('shop')">Casual</a></li>
+                    <li><a onclick="showPage('shop')">Evening</a></li>
+                    <li><a onclick="showPage('shop')">Boho</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Newsletter</h4>
+                <p style="margin: 15px 0;">Subscribe for new arrival updates.</p>
+                <input type="email" placeholder="Email Address">
+                <button class="btn" style="width: 100%; padding: 8px;">Subscribe</button>
+            </div>
+            <div>
+                <h4>Follow Us</h4>
+                <div class="social-links" style="margin-top:15px;">
+                    <a><i class="fab fa-instagram"></i></a>
+                    <a><i class="fab fa-facebook"></i></a>
+                    <a><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid #ddd; padding-top: 20px; font-size: 0.8rem;">
+            &copy; 2023 Tooba Ethnic Wear. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- CHATBOT HTML -->
+    <div class="chat-widget">
+        <div class="chat-btn" onclick="toggleChat()">
+            <i class="fa fa-comment-dots"></i>
+        </div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>Tooba Support</span>
+                <i class="fa fa-times" onclick="toggleChat()"></i>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-msg msg-bot">Hi there! How can I help you?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button onclick="sendChat()"><i class="fa fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- PRODUCT DATA ---
+        const products = [
+            { id: 1, name: "Sunny Yellow Dress", price: "PKR 7,500", img: "file:///C:/Users/Sohaib/.gemini/antigravity/brain/75697b8d-bd1b-434c-bf69-2c90e9cd0ee9/media__1774463062226.jpg" },
+            { id: 2, name: "Classic Black Dress", price: "PKR 8,200", img: "file:///C:/Users/Sohaib/.gemini/antigravity/brain/75697b8d-bd1b-434c-bf69-2c90e9cd0ee9/media__1774463062257.jpg" },
+            { id: 3, name: "Indigo Tie-Dye Maxi", price: "PKR 9,800", img: "file:///C:/Users/Sohaib/.gemini/antigravity/brain/75697b8d-bd1b-434c-bf69-2c90e9cd0ee9/media__1774463062330.jpg" },
+            { id: 4, name: "FV Tie-Dye Art", price: "Not For Sale", img: "file:///C:/Users/Sohaib/.gemini/antigravity/brain/75697b8d-bd1b-434c-bf69-2c90e9cd0ee9/media__1774463062373.jpg" },
+            { id: 5, name: "Avant-Garde Pin Garment", price: "PKR 15,000", img: "file:///C:/Users/Sohaib/.gemini/antigravity/brain/75697b8d-bd1b-434c-bf69-2c90e9cd0ee9/media__1774463062399.jpg" }
+        ];
+
+        // --- PAGE ROUTING ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Small timeout allows the browser to re-trigger the CSS animation
+            setTimeout(() => {
+                document.getElementById(pageId).classList.add('active');
+            }, 10);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- MOBILE MENU TOGGLE ---
+        function toggleMenu() {
+            const nav = document.getElementById('nav-links');
+            if(window.innerWidth <= 768) {
+                nav.classList.toggle('nav-active');
+            }
+        }
+
+        // --- RENDER PRODUCTS ---
+        function renderProducts() {
+            const shopGrid = document.getElementById('shop-grid');
+            const arrivalsGrid = document.getElementById('new-arrivals-grid');
+            
+            let html = "";
+            products.forEach(p => {
+                html += `
+                    <div class="product-card" onclick="viewProduct(${p.id})">
+                        <div class="product-img">
+                            <img src="${p.img}" alt="${p.name}">
+                            <div class="add-to-cart-overlay">View Details</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>${p.name}</h3>
+                            <p class="product-price">${p.price}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            shopGrid.innerHTML = html;
+            // For new arrivals, let's just use all products
+            arrivalsGrid.innerHTML = products.map(p => `
+                <div class="product-card" onclick="viewProduct(${p.id})">
+                    <div class="product-img">
+                        <img src="${p.img}" alt="${p.name}">
+                        <div class="add-to-cart-overlay">View Details</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <p class="product-price">${p.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- PRODUCT DETAIL LOGIC ---
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (product) {
+                document.getElementById('detail-title').innerText = product.name;
+                document.getElementById('detail-price').innerText = product.price;
+                document.getElementById('detail-img').src = product.img;
+                showPage('product-detail');
+            } else {
+                alert('Product not found!');
+            }
+        }
+
+        // --- CART LOGIC ---
+        let cartCount = 0;
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('active');
+        }
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            document.getElementById('cart-items').innerHTML = `<p style="text-align:center;">Item added to bag!</p>`;
+            alert("Added to your shopping bag!");
+        }
+
+        // Initialize
+        renderProducts();
+
+        // --- CHATBOT LOGIC ---
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+
+        function toggleChat() {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function appendMessage(sender, text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('chat-msg', sender === 'user' ? 'msg-user' : 'msg-bot');
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendChat() {
+            const text = chatInput.value.trim().toLowerCase();
+            if (!text) return;
+            
+            appendMessage('user', chatInput.value.trim());
+            chatInput.value = '';
+
+            setTimeout(() => {
+                let reply = "I'm sorry, I didn't quite catch that. Could you please specify your question about our dresses or shipping?";
+                
+                if (text.includes("hi") || text.includes("hello") || text.includes("hey")) {
+                    reply = "Hello there! Welcome to Tooba! How can I assist you in finding the perfect ethnic wear today?";
+                } else if (text.includes("price") || text.includes("cost") || text.includes("how much")) {
+                    reply = "Our premium ethnic and contemporary dresses range from PKR 5,000 to PKR 15,000. You can view all prices in our 'Shop' section!";
+                } else if (text.includes("ship") || text.includes("deliver")) {
+                    reply = "We offer nationwide shipping across Pakistan! Standard delivery takes 3-5 business days.";
+                } else if (text.includes("size") || text.includes("fit")) {
+                    reply = "Our outfits come in standard sizes: S, M, L, and XL. If you need a custom fit, please contact our support team!";
+                } else if (text.includes("location") || text.includes("address") || text.includes("where")) {
+                    reply = "Our flagship studio is located at H#441-G block, Khayaban-E-Amin, Defence Road, Lahore. Drop by anytime!";
+                } else if (text.includes("contact") || text.includes("number") || text.includes("phone")) {
+                    reply = "You can reach us at 00 92 322 4088004 or email us at sohaibadnan@gmail.com.";
+                }
+
+                appendMessage('bot', reply);
+            }, 600);
+        }
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendChat();
+        });
+    </script>
+</body>
+</html>
